@@ -9,6 +9,7 @@ function preprocessData(csvFile){
       header:true,
       complete: function (fileContent,file) {
         console.log(fileContent);
+        document.getElementById("search_results_container").visibility="visible";
       }
     })
   } else {
@@ -17,7 +18,7 @@ function preprocessData(csvFile){
 }
 // parsing the preprocessed data onto the front end
 function displayData() {
-  dcoument.getElementById("search_results_container").visibility="visible";
+  document.getElementById("search_results_container").visibility="visible";
 }
 
 // parsing the preprocessed data onto the front end
