@@ -1,11 +1,9 @@
 
 // parsing and pre processing the data into
 function preprocessData(csvFile){
-  // const csvFs = require('fs');
-
-  // const csvFile = "pod-data.csv";//fs.readFile("pod-data.csv"); //"pod-data.csv";
-  // const csv = require('csvtojson');
+  // the imported csv file initialisation
   const importedFile = csvFile.files[0];
+  // confirmation of file import
   if (importedFile) {
     Papa.parse(importedFile,{
       header:true,
@@ -13,18 +11,13 @@ function preprocessData(csvFile){
         console.log(fileContent);
       }
     })
-
+  } else {
+    alert("File not imported.");
   }
-  let csvJson = Papa.parse(csvFile);
-  csv().fromFile(csvFile).then((data)=>{
-    return data;
-  });
-  console.log(csvJson);
-
 }
 // parsing the preprocessed data onto the front end
 function displayData() {
-  dcoument.getElementById("search_results_container")
+  dcoument.getElementById("search_results_container").visibility="visible";
 }
 
 // parsing the preprocessed data onto the front end
