@@ -8,3 +8,30 @@ html, body{
   min-height: 100%;
 
 }
+
+h1{
+
+}
+h2{
+  
+}
+
+.header{
+  width: 100%;
+  padding: 30px;
+  background-color: black;
+  color: yellow;
+
+}
+.body_container{
+  padding: 30px;
+}
+.data_import_container{
+
+}
+.search_container{
+
+}
+.search_results_container{
+  visibility: hidden;
+}
