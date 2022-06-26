@@ -32,6 +32,6 @@ h2{
 .search_container{
 
 }
-.search_results_container{
+#search_results_container{
   visibility: hidden;
 }
