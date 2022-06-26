@@ -31,11 +31,27 @@
           <button class="btn btn-outline-secondary" type="button" id="search_button">Search</button>
         </div>
       </div>
-      
-      <!-- container for the generated table containe=ing the fetched data from the csv file -->
-      <div class="search_results_container">
 
-      </div>
+      <!-- Select forms for selective searching -->
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="column_selection">Columns</label>
+          <select class="form-select" id="column_selection">
+            <option selected>Choose column to search (by default all columns are searched)</option>
+            <option value="1">Customer</option>
+            <option value="2">Site</option>
+            <option value="3">Due By</option>
+            <option value="4">Completed</option>
+            <option value="5">Job Type</option>
+            <option value="6">Late</option>
+            <option value="7">Flagged</option>
+            <option value="8">Number of Items</option>
+          </select>
+        </div>
+    </div>
+
+    <!-- container for the generated table containe=ing the fetched data from the csv file -->
+    <div class="search_results_container">
+
     </div>
 
     <!-- Bootstrap javascript link -->
