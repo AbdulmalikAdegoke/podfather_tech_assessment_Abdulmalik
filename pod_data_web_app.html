@@ -16,13 +16,22 @@
     <div class="body_container">
       <!-- importing of the csv file -->
       <div class="data_import_container">
-
+        <!-- importing csv file -->
+        <div class="mb-3">
+          <label for="csv_file" class="form-label">POD Data csv file:</label>
+          <input class="form-control" type="file" id="csv_file" accept=".csv" onchange="preprocessData(this)" required>
+        </div>
       </div>
 
       <!-- container for the search input field -->
       <div class="search_container">
-
+        <!-- input field for the seacrh -->
+        <div class="input-group mb-3">
+          <input id="pod_data_query" type="text" class="form-control" placeholder="POD Data Query" aria-label="POD Data Query" aria-describedby="search_button">
+          <button class="btn btn-outline-secondary" type="button" id="search_button">Search</button>
+        </div>
       </div>
+      
       <!-- container for the generated table containe=ing the fetched data from the csv file -->
       <div class="search_results_container">
 
