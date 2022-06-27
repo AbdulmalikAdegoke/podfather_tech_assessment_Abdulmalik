@@ -88,3 +88,10 @@ function searchForData() {
   dataRequest.open('GET',"pod-data.txt");
   dataRequest.send();
 }
+
+// function for clearing the imported table
+function clearTable() {
+  document.getElementById("table_body").innerHTML="";
+  // displaying the section of front end containing the table
+  document.getElementById("search_results_container").style.visibility="hidden";
+}
