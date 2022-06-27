@@ -41,7 +41,34 @@ function displayData(dataToDisplay,filterOption="None") {
   dataToDisplay.data.map((row)=>{
     columns.forEach((columnName, i) => {
       if (columnName=="Late") {
-        row[columnName]=="Late"?tableToDisplay += "<td class=\"table-warning\">" + row[columnName] + "</td>": tableToDisplay += "<td class=\"table-success\>" + row[columnName] + "</td>";
+        row[columnName]=="Late"?tableToDisplay += "<td class=\"table-warning\">" + row[columnName] + "</td>": tableToDisplay += "<td class=\"table-success\">" + row[columnName] + "</td>";
+      } else if (columnName=="Flagged") {
+        row[columnName]=="Flagged"?tableToDisplay += "<td class=\"table-danger\">" + row[columnName] + "</td>": tableToDisplay += "<td class=\"table-info\">" + row[columnName] + "</td>";
+      } else {
+        tableToDisplay += "<td>" + row[columnName] + "</td>";
+      }
+    });
+    tableToDisplay +="</tr>";
+  }
+  )
+
+  // displaying the table
+  document.getElementById("table_body").innerHTML=tableToDisplay;
+}
+
+// displaying the preprocessed search data onto the front end
+function displaySearchData(dataToDisplay) {
+  // displaying the section of front end containing the table
+  document.getElementById("search_results_container").style.visibility="visible";
+
+  // variable to contain the row elements
+  let tableToDisplay ="<tr>";
+
+  // iterating through the csv data to create the rows of the data table
+  dataToDisplay.map((row)=>{
+    columns.forEach((columnName, i) => {
+      if (columnName=="Late") {
+        row[columnName]=="Late"?tableToDisplay += "<td class=\"table-warning\">" + row[columnName] + "</td>": tableToDisplay += "<td>" + row[columnName] + "</td>";
       } else if (columnName=="Flagged") {
         row[columnName]=="Flagged"?tableToDisplay += "<td class=\"table-danger\">" + row[columnName] + "</td>": tableToDisplay += "<td>" + row[columnName] + "</td>";
       } else {
@@ -56,35 +83,67 @@ function displayData(dataToDisplay,filterOption="None") {
   document.getElementById("table_body").innerHTML=tableToDisplay;
 }
 
-let searchFilter = document.getElementById("column_selection").value;
+// select menu
+let chosenOption = document.getElementById("column_selection");
+// filter option chosen
+let searchFilter = chosenOption.options[chosenOption.selectedIndex].value;
 
 // function responsible for the filtering and searching of the retrieved table results
-function filterSearch() {
-  let searchFilter = document.getElementById("column_selection").value;
-  console.log(fileData);
+function filterSearch(csvFileData,filterOption,searchQuery) {
+  // let searchFilter = document.getElementById("column_selection").value;
+
+  csvFileData.map((row,index)=>{
+    let cellContent = row[filterOption].toString();
+    if(!cellContent.includes(searchQuery)){csvFileData.splice(index, 1)};
+  }
+  )
+  // preprocessing the data
+  csvFileData.map((row)=>{
+    row["Late"]==0?row["Late"]="On Time":row["Late"]="Late";
+    row["Flagged"]==0?row["Flagged"]="Not Flagged":row["Flagged"]="Flagged";
+  }
+  )
+
+  // console.log(csvFileData);
+  return csvFileData; // filtered search results
 }
 
 // parsing the preprocessed data onto the front end
 function searchForData() {
+  // request initialisation
   const dataRequest = new XMLHttpRequest();
+
+  //
   dataRequest.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        // console.log(JSON.parse(this.responseText));
-        console.log(this.responseText);
+      document.getElementById("table_body").innerHTML=""; // resets the table section
+      // parsing json to array of objects
+      let csvFileData = JSON.parse(this.responseText);
+      // searched word/ query to the server
+      let searchWord = document.getElementById("pod_data_query").value;
+
+      // tests for data availability
+      console.log(csvFileData);
+      console.log(searchWord);
+      console.log(searchFilter);
+
+      // search error handling
+      if (searchWord=="") {
+        alert("No search input");
+      } else {
+        if (searchFilter=="None") {
+          displaySearchData(csvFileData);
+        } else {
+          csvFileData = filterSearch(csvFileData,searchFilter,searchWord.toString());
+          console.log(csvFileData);
+          displaySearchData(csvFileData);
+        }
+
+      }
+
     }
   };
-  // dataRequest.onload = function () {
-  //   try {
-  //     console.log(JSON.parse(this.responseText));
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  //   // if (searchFilter=="None") {
-  //   //   displayData()
-  //   // } else {
-  //   //   displayData()
-  //   // }
-  // }
+  // request from server
   dataRequest.open('GET',"pod-data.txt");
   dataRequest.send();
 }
