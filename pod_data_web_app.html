@@ -20,8 +20,8 @@
       <div class="data_import_container">
         <!-- importing csv file -->
         <div class="mb-3">
-          <label for="csv_file" class="form-label">POD Data csv file:</label>
-          <input class="form-control" type="file" id="csv_file" accept=".csv" onchange="preprocessData(this)" required>
+          <label for="csv_file" class="form-label">Import POD Data csv file:</label>
+          <input class="form-control" type="file" id="csv_file" accept=".csv" data-bs-toggle="modal" data-bs-target="#exampleModal" required>
         </div>
       </div>
 
@@ -30,7 +30,7 @@
         <!-- input field for the seacrh -->
         <div class="input-group mb-3">
           <input id="pod_data_query" type="text" class="form-control" placeholder="POD Data Query" aria-label="POD Data Query" aria-describedby="search_button">
-          <button class="btn btn-outline-secondary" type="button" id="search_button" onclick="filterSearch">Search</button>
+          <button class="btn btn-outline-secondary" type="button" id="search_button" onclick="searchForData()">Search</button>
         </div>
 
         <!-- Select forms for selective searching -->
@@ -73,6 +73,22 @@
         </div>
 
         <button onclick="filterSearch()" type="button" name="button">Test</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Import Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="preprocessData(document.getElementById('csv_file'))">Import CSV file</button>
+          </div>
+        </div>
+      </div>
     </div>
 
 

@@ -41,7 +41,7 @@ function displayData(dataToDisplay,filterOption="None") {
   dataToDisplay.data.map((row)=>{
     columns.forEach((columnName, i) => {
       if (columnName=="Late") {
-        row[columnName]=="Late"?tableToDisplay += "<td class=\"table-warning\">" + row[columnName] + "</td>": tableToDisplay += "<td>" + row[columnName] + "</td>";
+        row[columnName]=="Late"?tableToDisplay += "<td class=\"table-warning\">" + row[columnName] + "</td>": tableToDisplay += "<td class=\"table-success\>" + row[columnName] + "</td>";
       } else if (columnName=="Flagged") {
         row[columnName]=="Flagged"?tableToDisplay += "<td class=\"table-danger\">" + row[columnName] + "</td>": tableToDisplay += "<td>" + row[columnName] + "</td>";
       } else {
@@ -67,13 +67,24 @@ function filterSearch() {
 // parsing the preprocessed data onto the front end
 function searchForData() {
   const dataRequest = new XMLHttpRequest();
-  dataRequest.onload = function () {
-    if (searchFilter=="None") {
-      displayData()
-    } else {
-      displayData()
+  dataRequest.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        // console.log(JSON.parse(this.responseText));
+        console.log(this.responseText);
     }
-  }
-  dataRequest.open('GET',fileData)
-  dataRequest.send()
+  };
+  // dataRequest.onload = function () {
+  //   try {
+  //     console.log(JSON.parse(this.responseText));
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  //   // if (searchFilter=="None") {
+  //   //   displayData()
+  //   // } else {
+  //   //   displayData()
+  //   // }
+  // }
+  dataRequest.open('GET',"pod-data.txt");
+  dataRequest.send();
 }
