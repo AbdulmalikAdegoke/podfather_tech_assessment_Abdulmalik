@@ -1,5 +1,5 @@
 let fileData=[];
-let columns =["Customer","Site","Due By","Completed","Job Type","Late","Flagged","Number of Items"]
+let columns =["Customer","Site","Due By","Completed At","Job Type","Late","Flagged","Number of Items"]
 // parsing and pre processing the data into
 function preprocessData(csvFile){
   // the imported csv file initialisation
@@ -17,6 +17,7 @@ function preprocessData(csvFile){
           row["Flagged"]==0?row["Flagged"]="Not Flagged":row["Flagged"]="Flagged";
         }
         )
+        displayData(fileData);
         console.log(Object.keys(fileContent.data[0]));
         document.getElementById("search_results_container").style.visibility="visible";
       }
@@ -25,16 +26,23 @@ function preprocessData(csvFile){
     alert("File not imported.");
   }
 }
-// parsing the preprocessed data onto the front end
+// displaying the preprocessed data onto the front end
 function displayData(dataToDisplay,filterOption="None") {
   document.getElementById("search_results_container").style.visibility="visible";
   let tableToDisplay ="<tr>";
-  // document.getElementById("table_body").innerHTML;
+  // iterating through the csv data to create the rows of the data table
+  dataToDisplay.data.map((row)=>{
+    columns.forEach((columnName, i) => {
+      tableToDisplay += "<td>" + row[columnName] + "</td>";
+    });
+    tableToDisplay +="</tr>";
+  }
+  )
   // <tr>
   //   <td></td>
   // </tr>
-
-
+  // displaying the table
+  document.getElementById("table_body").innerHTML=tableToDisplay;
 }
 
 // function responsible for the filtering of the retrieved table results
