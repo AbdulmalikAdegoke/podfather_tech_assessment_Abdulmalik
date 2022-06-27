@@ -37,7 +37,7 @@
           <div class="input-group mb-3">
             <label class="input-group-text" for="column_selection">Filter by:</label>
             <select class="form-select" id="column_selection" onchange="filterSearch">
-              <option selected>Choose column to search (by default all columns are searched)</option>
+              <option value="None" selected>Choose column to search (by default all columns are searched)</option>
               <option value="Customer">Customer</option>
               <option value="Site">Site</option>
               <option value="Due By">Due By</option>
@@ -53,7 +53,7 @@
         <!-- container for the generated table containe=ing the fetched data from the csv file -->
         <div id="search_results_container">
           <h2>POD Data Table:</h2>
-          <table class="table">
+          <table class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col">Customer</th>
@@ -67,10 +67,12 @@
               </tr>
             </thead>
             <tbody id="table_body">
-              
+
             </tbody>
           </table>
         </div>
+
+        <button onclick="filterSearch()" type="button" name="button">Test</button>
     </div>
 
 

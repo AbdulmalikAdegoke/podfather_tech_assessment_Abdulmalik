@@ -1,4 +1,5 @@
 let fileData=[];
+let columns =["Customer","Site","Due By","Completed","Job Type","Late","Flagged","Number of Items"]
 // parsing and pre processing the data into
 function preprocessData(csvFile){
   // the imported csv file initialisation
@@ -9,6 +10,13 @@ function preprocessData(csvFile){
       header:true,
       complete: function (fileContent,file) {
         console.log(fileContent);
+        fileData=fileContent;
+        // changing the binary values of the late and flagged rows to readable foromats for any user
+        fileData.data.map((row)=>{
+          row["Late"]==0?row["Late"]="On Time":row["Late"]="Late";
+          row["Flagged"]==0?row["Flagged"]="Not Flagged":row["Flagged"]="Flagged";
+        }
+        )
         console.log(Object.keys(fileContent.data[0]));
         document.getElementById("search_results_container").style.visibility="visible";
       }
@@ -18,8 +26,9 @@ function preprocessData(csvFile){
   }
 }
 // parsing the preprocessed data onto the front end
-function displayData() {
+function displayData(dataToDisplay,filterOption="None") {
   document.getElementById("search_results_container").style.visibility="visible";
+  let tableToDisplay ="<tr>";
   // document.getElementById("table_body").innerHTML;
   // <tr>
   //   <td></td>
@@ -31,16 +40,21 @@ function displayData() {
 // function responsible for the filtering of the retrieved table results
 function filterSearch() {
   let searchFilter = document.getElementById("column_selection").value;
-
+  console.log(fileData);
 }
+
+let searchFilter = document.getElementById("column_selection").value;
 
 // parsing the preprocessed data onto the front end
 function searchForData() {
   const dataRequest = new XMLHttpRequest();
   dataRequest.onload = function () {
-    displayData()
-
+    if (searchFilter=="None") {
+      displayData()
+    } else {
+      displayData()
+    }
   }
-  dataRequest.open('GET',)
+  dataRequest.open('GET',fileData)
   dataRequest.send()
 }
