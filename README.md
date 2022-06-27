@@ -33,7 +33,7 @@ The functionalities to be included in the app: a search function, a filter funct
 
 ### Self reflection: 
 - Could have used Python and Django as initially planned as I was already familiar with the libraries available for data parsing in Python and the support for http requests using Django.
-- For the implementation of the data search with my current approach, I should have began the development with a server implementation.
+- For the implementation of the data search with my current approach, I should have began the development with a server implementation i.e. with a server side scripting language in mind from the beginning that way time would have been better used.
 
 ### Future ideas:
 - Further polishing of the filtration to make the filter more column specfiic
