@@ -33,7 +33,13 @@ function displayData(dataToDisplay,filterOption="None") {
   // iterating through the csv data to create the rows of the data table
   dataToDisplay.data.map((row)=>{
     columns.forEach((columnName, i) => {
-      tableToDisplay += "<td>" + row[columnName] + "</td>";
+      if (columnName=="Late") {
+        row[columnName]=="Late"?tableToDisplay += "<td class=\"table-warning\">" + row[columnName] + "</td>": tableToDisplay += "<td>" + row[columnName] + "</td>";
+      } else if (columnName=="Flagged") {
+        row[columnName]=="Flagged"?tableToDisplay += "<td class=\"table-danger\">" + row[columnName] + "</td>": tableToDisplay += "<td>" + row[columnName] + "</td>";
+      } else {
+        tableToDisplay += "<td>" + row[columnName] + "</td>";
+      }
     });
     tableToDisplay +="</tr>";
   }
