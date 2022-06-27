@@ -30,7 +30,7 @@
         <!-- input field for the seacrh -->
         <div class="input-group mb-3">
           <input id="pod_data_query" type="text" class="form-control" placeholder="POD Data Query" aria-label="POD Data Query" aria-describedby="search_button">
-          <button class="btn btn-outline-secondary" type="button" id="search_button">Search</button>
+          <button class="btn btn-outline-secondary" type="button" id="search_button" onclick="filterSearch">Search</button>
         </div>
 
         <!-- Select forms for selective searching -->
@@ -41,7 +41,7 @@
               <option value="Customer">Customer</option>
               <option value="Site">Site</option>
               <option value="Due By">Due By</option>
-              <option value="Completed">Completed At</option>
+              <option value="Completed At">Completed At</option>
               <option value="Job Type">Job Type</option>
               <option value="Late">Late</option>
               <option value="Flagged">Flagged</option>

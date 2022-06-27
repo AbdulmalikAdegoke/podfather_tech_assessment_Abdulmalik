@@ -1,4 +1,6 @@
+// variable for storing the file data
 let fileData=[];
+// column names array for aiding the row data iteration
 let columns =["Customer","Site","Due By","Completed At","Job Type","Late","Flagged","Number of Items"]
 // parsing and pre processing the data into
 function preprocessData(csvFile){
@@ -23,13 +25,18 @@ function preprocessData(csvFile){
       }
     })
   } else {
+    // error alert for situations when the file has not been imported
     alert("File not imported.");
   }
 }
 // displaying the preprocessed data onto the front end
 function displayData(dataToDisplay,filterOption="None") {
+  // displaying the section of front end containing the table
   document.getElementById("search_results_container").style.visibility="visible";
+
+  // variable to contain the row elements
   let tableToDisplay ="<tr>";
+
   // iterating through the csv data to create the rows of the data table
   dataToDisplay.data.map((row)=>{
     columns.forEach((columnName, i) => {
@@ -44,20 +51,18 @@ function displayData(dataToDisplay,filterOption="None") {
     tableToDisplay +="</tr>";
   }
   )
-  // <tr>
-  //   <td></td>
-  // </tr>
+
   // displaying the table
   document.getElementById("table_body").innerHTML=tableToDisplay;
 }
 
-// function responsible for the filtering of the retrieved table results
+let searchFilter = document.getElementById("column_selection").value;
+
+// function responsible for the filtering and searching of the retrieved table results
 function filterSearch() {
   let searchFilter = document.getElementById("column_selection").value;
   console.log(fileData);
 }
-
-let searchFilter = document.getElementById("column_selection").value;
 
 // parsing the preprocessed data onto the front end
 function searchForData() {
