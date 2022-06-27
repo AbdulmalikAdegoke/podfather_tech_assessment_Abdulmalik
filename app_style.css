@@ -10,10 +10,10 @@ html, body{
 }
 
 h1{
-
+  font-weight: bold;
 }
 h2{
-  
+
 }
 
 .header{
@@ -32,6 +32,6 @@ h2{
 .search_container{
 
 }
-.search_results_container{
+#search_results_container{
   visibility: hidden;
 }

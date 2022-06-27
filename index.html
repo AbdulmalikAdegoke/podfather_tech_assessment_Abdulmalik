@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POD Data Visualiser</title>
+
+    <!-- Bootstrap style link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- css link -->
+    <link rel="stylesheet" href="app_style.css">
+  </head>
+  <body>
+    <!-- header section -->
+    <div class="header">
+      <h1>Proof of Delivery data viewer</h1>
+    </div>
+    <!-- body section -->
+    <div class="body_container">
+      <!-- importing of the csv file -->
+      <div class="data_import_container">
+        <!-- importing csv file -->
+        <div class="mb-3">
+          <label for="csv_file" class="form-label">Import POD Data csv file:</label>
+          <input class="form-control" type="file" id="csv_file" accept=".csv" data-bs-toggle="modal" data-bs-target="#exampleModal" required>
+        </div>
+      </div>
+
+      <!-- container for the search input field -->
+      <div class="search_container">
+        <!-- input field for the seacrh -->
+        <div class="input-group mb-3">
+          <input id="pod_data_query" type="text" class="form-control" placeholder="POD Data Query" aria-label="POD Data Query" aria-describedby="search_button">
+          <button class="btn btn-outline-secondary" type="button" id="search_button" onclick="searchForData()">Search</button>
+        </div>
+
+        <!-- Select forms for selective searching -->
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="column_selection">Filter by:</label>
+            <select class="form-select" id="column_selection" onchange="filterSearch">
+              <option value="None" selected>Choose column to search (by default all columns are searched)</option>
+              <option value="Customer">Customer</option>
+              <option value="Site">Site</option>
+              <option value="Due By">Due By</option>
+              <option value="Completed At">Completed At</option>
+              <option value="Job Type">Job Type</option>
+              <option value="Late">Late</option>
+              <option value="Flagged">Flagged</option>
+              <option value="Number of Items">Number of Items</option>
+            </select>
+          </div>
+      </div>
+
+        <!-- container for the generated table containe=ing the fetched data from the csv file -->
+        <div id="search_results_container">
+          <button type="button" class="btn btn-danger" onclick="clearTable()">Clear Table</button>
+          <h2>POD Data Table:</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Customer</th>
+                <th scope="col">Site</th>
+                <th scope="col">Due By</th>
+                <th scope="col">Completed At</th>
+                <th scope="col">Job Type</th>
+                <th scope="col">Late</th>
+                <th scope="col">Flagged</th>
+                <th scope="col">Number of Items</th>
+              </tr>
+            </thead>
+            <tbody id="table_body">
+
+            </tbody>
+          </table>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Import Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="preprocessData(document.getElementById('csv_file'))">Import CSV file</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Bootstrap javascript link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- csv to json script papaparse library link -->
+    <script src="papaparse.min.js"></script>
+    <!-- script for the page's functionalities (ajax) -->
+    <script src="app_functionalities.js" charset="utf-8"></script>
+
+  </body>
+</html>
